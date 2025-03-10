@@ -1,2 +1,1 @@
 # kryzhovnik-game
-Продам гараж
