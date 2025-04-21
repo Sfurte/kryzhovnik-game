@@ -21,7 +21,11 @@ public class Graph_Data : MonoBehaviour
         }
 
             graph_.CreateXY();
+        graph_.DrawGraph(DataArray);
+        graph_.LocateGraph(DataArray);
     }
+
+    
 
     void Update()
     {

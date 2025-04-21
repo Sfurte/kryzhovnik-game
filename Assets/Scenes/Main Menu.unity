@@ -168,11 +168,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d0d2e15c22fcad4b89e58ec83d6becc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scale: 2
+  scale: 0.5
   XDivision: {fileID: 2965981723756939012, guid: 7617372e867a06d479d7332429ac7d4c, type: 3}
-  CountXDivision: 5
+  CountXDivision: 20
+  XDivisionSize: {x: 0.01, y: 1}
   YDivision: {fileID: 8111136925921572381, guid: b544338708d258547854a671dd5bb40e, type: 3}
-  CountYDivision: 5
+  CountYDivision: 20
+  YDivisionSize: {x: 1, y: 0.01}
+  Point: {fileID: 65824683378758781, guid: ab3644eee10d2714c919481bed005fc3, type: 3}
+  Width: 0.1
 --- !u!120 &62445647
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -216,8 +220,8 @@ LineRenderer:
   m_SortingOrder: 0
   m_Positions:
   - {x: 0, y: 0, z: 0}
-  - {x: 2, y: 6, z: 1}
-  - {x: 6, y: 6, z: 1}
+  - {x: 1, y: 1, z: 1}
+  - {x: 2, y: 3, z: 0}
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 1
@@ -330,7 +334,7 @@ GameObject:
   - component: {fileID: 774361629}
   - component: {fileID: 774361630}
   m_Layer: 0
-  m_Name: Y
+  m_Name: Y axis
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -414,7 +418,7 @@ GameObject:
   - component: {fileID: 1270534349}
   - component: {fileID: 1270534350}
   m_Layer: 0
-  m_Name: X
+  m_Name: X axis
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
