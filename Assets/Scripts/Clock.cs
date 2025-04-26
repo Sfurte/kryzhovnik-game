@@ -43,9 +43,9 @@ public class Clock : MonoBehaviour
     {
         while (true)
         {
+            yield return new WaitForSeconds(tickDuration);
             TickActions();
             TickNumber++;
-            yield return new WaitForSeconds(tickDuration);
         }
     }
 }

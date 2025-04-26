@@ -39,13 +39,13 @@ public class Graph_Data : MonoBehaviour
         UpdateGraph();
     }
 
-    public void AddPoint(Vector3 point)
+    public void AddPoint(float height)
     {
         DataArray.RemoveAt(0);
 
 
         Vector3 lastPoint = DataArray.Last();
-        DataArray.Add(new Vector3(lastPoint.x + ScaleX, point.y, 0));
+        DataArray.Add(new Vector3(lastPoint.x + ScaleX, height, 0));
 
         ShiftPointsLeft();
 
