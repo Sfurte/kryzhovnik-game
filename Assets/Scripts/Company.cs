@@ -7,14 +7,16 @@ using UnityEngine;
 /// </summary>
 public class Company
 {
-    public static List<Company> AllCompanies = new List<Company>();
+    public static IReadOnlyList<Company> AllCompanies { get => allCompanies; }
     public string Name { get; }
     public CompanyStock Stock { get; }
+
+    private static List<Company> allCompanies = new List<Company>();
 
     public Company(string name, double sharePrice, double dividendsPerShare)
     {
         Name = name;
         Stock = new CompanyStock(sharePrice, dividendsPerShare);
-        AllCompanies.Add(this);
+        allCompanies.Add(this);
     }
 }

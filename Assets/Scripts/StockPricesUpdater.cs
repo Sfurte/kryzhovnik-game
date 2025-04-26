@@ -20,6 +20,7 @@ public class StockPricesUpdater : MonoBehaviour
         foreach (var company in Company.AllCompanies)
         {
             company.Stock.Price = GetNextPrice(company.Stock);
+            Debug.Log($"Теперь у компании \"{company.Name}\" цена акции {company.Stock.Price}");
         }
     }
 

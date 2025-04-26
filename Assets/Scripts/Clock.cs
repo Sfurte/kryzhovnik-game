@@ -28,7 +28,7 @@ public class Clock : MonoBehaviour
 
     private void Start()
     {
-        TickActions = () =>
+        TickActions += () =>
         {
             Debug.Log($"Tick #{TickNumber}");
         };
@@ -41,8 +41,11 @@ public class Clock : MonoBehaviour
     /// </summary>
     public IEnumerator Tick()
     {
-        TickActions();
-        TickNumber++;
-        yield return new WaitForSeconds(tickDuration);
+        while (true)
+        {
+            TickActions();
+            TickNumber++;
+            yield return new WaitForSeconds(tickDuration);
+        }
     }
 }
