@@ -25,9 +25,12 @@ public class Graph_ : MonoBehaviour
 
     public void CreateXY()
     {
+        Vector3 Position = transform.position;
+
+
         for (int i = 1; i < CountXDivision; i++)
         {
-            GameObject division = Instantiate(XDivision, new Vector3(i * scale, 0, 0), transform.rotation);
+            GameObject division = Instantiate(XDivision, Position +new Vector3(i * scale, 0, 0), transform.rotation);
             // Устанавливаем размер для X делений
             division.transform.localScale = new Vector3(XDivisionSize.x, XDivisionSize.y, 1f);
 
@@ -36,9 +39,10 @@ public class Graph_ : MonoBehaviour
 
         for (int i = 1; i < CountYDivision; i++)
         {
-            GameObject division = Instantiate(YDivision, new Vector3(0, i * scale, 0), transform.rotation);
+            GameObject division = Instantiate(YDivision, Position+ new Vector3(0, i * scale, 0), transform.rotation);
             // Устанавливаем размер для Y делений
             division.transform.localScale = new Vector3(YDivisionSize.x, YDivisionSize.y, 1f);
+            division.transform.GetChild(0).gameObject.GetComponent<TextMesh>().text = i.ToString();
         }
 
     }
@@ -57,10 +61,11 @@ public class Graph_ : MonoBehaviour
 
     public void LocateGraph(Vector3[] arrPoint)
     {
+        Vector3 Position = transform.position;
+
         for (int i = 0; i < arrPoint.Length; i++)
         {
-            Tops[i] = new Vector3(arrPoint[i].x * scale, arrPoint[i].y * scale, 0);
-
+            Tops[i] = Position +  new Vector3(arrPoint[i].x * scale, arrPoint[i].y * scale, 0);
         }
 
         for (int i = 0; i < arrPoint.Length; i++)
