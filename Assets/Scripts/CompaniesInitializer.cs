@@ -40,7 +40,7 @@ public class CompaniesInitializer : MonoBehaviour
     /// <returns></returns>
     private List<Company> CreateUninitializedCompanies()
     {
-        return new List<Company>() { new Company("Cool company", 100, 0.02) };
+        return new List<Company>() { new Company("Cool company", 100, 0.02f) };
     }
 
     /// <summary>

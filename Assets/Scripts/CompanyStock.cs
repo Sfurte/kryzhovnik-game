@@ -10,7 +10,7 @@ public class CompanyStock
     /// <summary>
     /// Текущая цена за одну акцию
     /// </summary>
-    public double Price
+    public float Price
     {
         get => price;
         set
@@ -24,11 +24,11 @@ public class CompanyStock
     /// где первый элемент - самая старая записанная цена,
     /// а последний - текущая цена.
     /// </summary>
-    public IReadOnlyList<double> PriceLog { get => priceLog; }
+    public IReadOnlyList<float> PriceLog { get => priceLog; }
     /// <summary>
     /// Объем дивидендов, выплачиваемых за одну акцию (абсолютное значение, не процент)
     /// </summary>
-    public double DividendsPerShare { get; private set; }
+    public float DividendsPerShare { get; private set; }
     /// <summary>
     /// Число акций, купленных игроком
     /// </summary>
@@ -39,10 +39,10 @@ public class CompanyStock
     /// </summary>
     public int MaxBuyAmount { get => (int)(PlayerStats.Money / Price); }
 
-    private double price;
-    private List<double> priceLog = new List<double>();
+    private float price;
+    private List<float> priceLog = new List<float>();
 
-    public CompanyStock(double price, double dividendsPerShare)
+    public CompanyStock(float price, float dividendsPerShare)
     {
         Price = price;
         DividendsPerShare = dividendsPerShare;

@@ -7,9 +7,9 @@ public class News
     public string Title { get; private set; }
     public string Text { get; private set; }
     public Company AffectedCompany { get; private set; }
-    public double ImpactOnStocks { get; private set; }
+    public float ImpactOnStocks { get; private set; }
 
-    public News(string title, string text, Company affectedCompany, double impactOnStocks)
+    public News(string title, string text, Company affectedCompany, float impactOnStocks)
     {
         Title = title;
         Text = text;

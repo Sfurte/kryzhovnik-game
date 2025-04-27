@@ -13,7 +13,7 @@ public class Company
 
     private static List<Company> allCompanies = new List<Company>();
 
-    public Company(string name, double sharePrice, double dividendsPerShare)
+    public Company(string name, float sharePrice, float dividendsPerShare)
     {
         Name = name;
         Stock = new CompanyStock(sharePrice, dividendsPerShare);
