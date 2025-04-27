@@ -23,9 +23,7 @@ public class Graph_Data : MonoBehaviour
             DataArray.Add(new Vector3(i * ScaleX, Random.Range(10, 100), 0));
         }
 
-        graph_.CreateXY();
-        graph_.DrawGraph(DataArray.ToArray());
-        graph_.LocateGraph(DataArray.ToArray());
+        CreateGraph();
     }
 
     public void AddRandomPoint()
@@ -63,10 +61,15 @@ public class Graph_Data : MonoBehaviour
 
     private void UpdateGraph()
     {
-        graph_.ShiftHoursLeft();
-        graph_.CreateXY();
-        graph_.DrawGraph(DataArray.ToArray());
-        graph_.LocateGraph(DataArray.ToArray());
+        graph_.UpdateGraph(DataArray.ToArray());
 
     }
+
+    private void CreateGraph()
+    {
+        //graph_.CreateGraph(DataArray.ToArray());
+        graph_.UpdateGraph(DataArray.ToArray());
+    }
+
+
 }
