@@ -16,6 +16,7 @@ public class NewsManager : MonoBehaviour
     private void Awake()
     {
         templates = new List<NewsTemplate>(NewsParser.GetTemplates());
+        OnNewsActivated = (news) => { Debug.Log($"Новость: {news.Title}"); };
     }
 
     private void Start()
@@ -32,7 +33,6 @@ public class NewsManager : MonoBehaviour
     public void ActivateNews(News news)
     {
         news.AffectedCompany.Stock.Price += news.ImpactOnStocks;
-        Debug.Log($"Новость: {news.Title}");
 
         activeNews.Add(news);
         OnNewsActivated(news);
