@@ -67,8 +67,8 @@ public class Graph_Data : MonoBehaviour
 
     private void CreateGraph()
     {
-        //graph_.CreateGraph(DataArray.ToArray());
-        graph_.UpdateGraph(DataArray.ToArray());
+        graph_.CreateGraph(DataArray.ToArray());
+
     }
 
 

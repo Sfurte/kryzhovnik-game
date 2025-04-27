@@ -136,6 +136,7 @@ public class Graph_ : MonoBehaviour
         tmp.text = value;
         tmp.fontSize = fontSize;
         tmp.alignment = TextAlignmentOptions.Center;
+        tmp.color = UnityEngine.Color.black;
 
         return textObj;
     }
