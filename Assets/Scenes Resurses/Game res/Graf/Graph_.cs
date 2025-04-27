@@ -39,75 +39,92 @@ public class Graph_ : MonoBehaviour
     public float lineLength = 10f;
 
 
-    private GameObject[] Points;        
+    private GameObject[] Points;
     private Vector3[] Tops;
     private LineRenderer lineRenderer;
 
 
-    private List<GameObject> xDivisions = new List<GameObject>();       //Созданные деления
-    private List<GameObject> xDivisionTexts = new List<GameObject>();
     private int currentFirstHour = 0;
 
 
 
+    private List<GameObject> allGraphObjects = new List<GameObject>(); // все созданные объекты графика
+
+    private void ClearAllGraphObjects()
+    {
+        foreach (var obj in allGraphObjects)
+        {
+            if (obj != null)
+            {
+                Destroy(obj);
+            }
+        }
+        allGraphObjects.Clear();
+
+
+        Points = null;
+    }
+
     public void CreateXY()
     {
-        ClearOldDivisions();
+        ClearAllGraphObjects(); 
 
         Vector3 Position = transform.position;
 
-        for (int i = 0; i < CountXDivision; i++)        // oX
+        for (int i = 0; i < CountXDivision; i++)
         {
             int hour = (currentFirstHour + i) % 24;
-
             Vector3 divisionPos = Position + new Vector3(i * scaleXAxisDivisions, 0, 0);
+
             GameObject division = Instantiate(XDivision, divisionPos, transform.rotation);
             division.transform.localScale = new Vector3(XDivisionSize.x, XDivisionSize.y, 1f);
-            xDivisions.Add(division);
+            allGraphObjects.Add(division);
 
             Vector3 textPos = divisionPos + new Vector3(0, -xAxisTextOffset, 0);
             GameObject textObj = CreateTextDivision(textPos, FormatTime(hour), axisFontSize);
-            xDivisionTexts.Add(textObj);
+            allGraphObjects.Add(textObj);
         }
 
-
-
-        for (int i = 0; i < CountYDivision; i++)        //oY
+        for (int i = 0; i < CountYDivision; i++)
         {
-       
-
-            Vector3 divisionPos = Position + new Vector3(0,i * scaleYAxisDivisions, 0);
+            Vector3 divisionPos = Position + new Vector3(0, i * scaleYAxisDivisions, 0);
             GameObject division = Instantiate(YDivision, divisionPos, transform.rotation);
             division.transform.localScale = new Vector3(YDivisionSize.x, YDivisionSize.y, 1f);
+            allGraphObjects.Add(division);
 
-            Vector3 textPos = divisionPos + new Vector3(-yAxisTextOffset,0, 0);
-            GameObject textObj = CreateTextDivision(textPos, (i* DivisionYValue).ToString(), axisFontSize);
-            xDivisionTexts.Add(textObj);
+            Vector3 textPos = divisionPos + new Vector3(-yAxisTextOffset, 0, 0);
+            GameObject textObj = CreateTextDivision(textPos, (i * DivisionYValue).ToString(), axisFontSize);
+            allGraphObjects.Add(textObj);
         }
-
-
     }
 
-    private void ClearOldDivisions()
+    public void DrawGraph(Vector3[] arrayPoints)
     {
-
-        foreach (var division in xDivisions)
+        if (Points != null)
         {
-            if (division != null) Destroy(division);
+            foreach (var point in Points)
+            {
+                if (point != null) Destroy(point);
+            }
         }
-        xDivisions.Clear();
 
-        foreach (var text in xDivisionTexts)
+        Tops = arrayPoints;
+        Points = new GameObject[arrayPoints.Length];
+        lineRenderer = GetComponent<LineRenderer>();
+
+        for (int i = 0; i < Points.Length; i++)
         {
-            if (text != null) Destroy(text);
+            Points[i] = Instantiate(Point, Vector3.zero, transform.rotation);
+            allGraphObjects.Add(Points[i]); 
         }
-        xDivisionTexts.Clear();
     }
+
+    
 
     public void ShiftHoursLeft()
     {
         currentFirstHour = (currentFirstHour + 1) % 24;
-        CreateXY(); 
+        CreateXY();
     }
 
     public GameObject CreateTextDivision(Vector3 position, string value, int fontSize)
@@ -119,6 +136,7 @@ public class Graph_ : MonoBehaviour
         tmp.text = value;
         tmp.fontSize = fontSize;
         tmp.alignment = TextAlignmentOptions.Center;
+        tmp.color = UnityEngine.Color.black;
 
         return textObj;
     }
@@ -132,7 +150,7 @@ public class Graph_ : MonoBehaviour
     {
         if (points == null || points.Length == 0) return;
 
-      //  float yPos = points[points.Length - 1].y * scaleGraphY;
+        //  float yPos = points[points.Length - 1].y * scaleGraphY;
         Vector3 linePosition = transform.position + new Vector3(points[points.Length - 1].x * scaleGraphY, points[points.Length - 1].y * scaleGraphY, 0);
 
         if (currentHorizontalLine == null)
@@ -145,19 +163,6 @@ public class Graph_ : MonoBehaviour
     }
 
 
-    public void DrawGraph(Vector3[] arrayPoints)
-    {
-        Tops = arrayPoints;
-        Points = new GameObject[arrayPoints.Length];
-
-        lineRenderer = GetComponent<LineRenderer>();
-
-        for (int i = 0; i < Points.Length; i++)
-            Points[i] = Instantiate(Point, Vector3.zero, transform.rotation);
-
-        
-
-    }
 
     public void LocateGraph(Vector3[] arrPoint)
     {
@@ -177,7 +182,26 @@ public class Graph_ : MonoBehaviour
         lineRenderer.positionCount = Tops.Length;
         lineRenderer.SetPositions(Tops);
 
-        UpdateHorizontalLine(arrPoint);
+        
+    }
+
+    public void UpdateGraph(Vector3[] DataArray)
+    {
+        ClearAllGraphObjects();
+        ShiftHoursLeft();
+        CreateXY();
+        DrawGraph(DataArray);
+        UpdateHorizontalLine(DataArray);
+        LocateGraph(DataArray);
+    }
+
+    public void CreateGraph(Vector3[] DataArray)
+    {
+        ClearAllGraphObjects();
+        CreateXY();
+        DrawGraph(DataArray);
+        UpdateHorizontalLine(DataArray);
+        LocateGraph(DataArray);
     }
 
 
