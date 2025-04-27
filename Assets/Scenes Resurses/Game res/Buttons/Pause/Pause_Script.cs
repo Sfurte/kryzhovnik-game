@@ -6,10 +6,6 @@ public class Pause_Script : MonoBehaviour
 {
 
     [SerializeField] private GameObject pausePanel; 
-    private bool isPaused = false;
-
-
-
 
     public void OnButtonClick()
     {

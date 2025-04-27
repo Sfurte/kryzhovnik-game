@@ -23,6 +23,7 @@ public class Graph_Data : MonoBehaviour
             DataArray.Add(new Vector3(i * ScaleX, Random.Range(10, 100), 0));
         }
 
+        graph_.CreateXY();
         graph_.DrawGraph(DataArray.ToArray());
         graph_.LocateGraph(DataArray.ToArray());
     }
@@ -39,13 +40,12 @@ public class Graph_Data : MonoBehaviour
         UpdateGraph();
     }
 
-    public void AddPoint(float height)
+    public void AddPoint(float value)
     {
         DataArray.RemoveAt(0);
 
-
         Vector3 lastPoint = DataArray.Last();
-        DataArray.Add(new Vector3(lastPoint.x + ScaleX, height, 0));
+        DataArray.Add(new Vector3(lastPoint.x + ScaleX, value, 0));
 
         ShiftPointsLeft();
 
@@ -62,7 +62,10 @@ public class Graph_Data : MonoBehaviour
 
     private void UpdateGraph()
     {
+        graph_.ShiftHoursLeft();
+        graph_.CreateXY();
         graph_.DrawGraph(DataArray.ToArray());
         graph_.LocateGraph(DataArray.ToArray());
+
     }
 }
