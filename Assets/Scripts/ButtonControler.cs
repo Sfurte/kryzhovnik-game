@@ -7,7 +7,7 @@ public class ButtonControler : MonoBehaviour
 
     public void BuyOne()
     {
-        GameState.SelectedCompany.Stock.Buy(1);
+        GameState.SelectedCompany.Stock.TryBuy(1);
         Debug.Log("Куплена 1 акция");
     }
 }

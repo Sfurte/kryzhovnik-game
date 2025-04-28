@@ -80,11 +80,9 @@ public class CompanyStock
     {
         float TotalPrice = Price * amount;
 
-        if (CheckOperations(TotalPrice))
-        { 
         PlayerStats.Money -= TotalPrice;
         BoughtAmount += amount;
-        }
+        
     }
 
     /// <summary>
@@ -93,10 +91,5 @@ public class CompanyStock
     public void PayDividends()
     {
         PlayerStats.Money += DividendsPerShare * BoughtAmount;
-    }
-
-    private bool CheckOperations(float price)
-    {
-        return price <= PlayerStats.Money;
     }
 }
