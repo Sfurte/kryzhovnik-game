@@ -10,6 +10,7 @@ public class GamePtocess : MonoBehaviour
 
     void Start()
     {
+        PlayerStats.Money = 1000;
     }
 
     // Update is called once per frame

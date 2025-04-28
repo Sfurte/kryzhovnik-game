@@ -78,8 +78,13 @@ public class CompanyStock
     /// <param name="amount">Число акций к покупке</param>
     public void Buy(int amount)
     {
-        PlayerStats.Money -= Price * amount;
+        float TotalPrice = Price * amount;
+
+        if (CheckOperations(TotalPrice))
+        { 
+        PlayerStats.Money -= TotalPrice;
         BoughtAmount += amount;
+        }
     }
 
     /// <summary>
@@ -88,5 +93,10 @@ public class CompanyStock
     public void PayDividends()
     {
         PlayerStats.Money += DividendsPerShare * BoughtAmount;
+    }
+
+    private bool CheckOperations(float price)
+    {
+        return price <= PlayerStats.Money;
     }
 }
