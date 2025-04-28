@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class NewsManager : MonoBehaviour
@@ -8,10 +9,15 @@ public class NewsManager : MonoBehaviour
     public IReadOnlyList<News> ActiveNews { get => activeNews; }
     public static Action<News> OnNewsActivated;
 
+    public GameObject NewsWindow;
+
+
     [SerializeField]
     private float newsChancePerTick;
     private List<News> activeNews = new List<News>();
     private List<NewsTemplate> templates;
+
+
 
     private void Awake()
     {
@@ -36,6 +42,19 @@ public class NewsManager : MonoBehaviour
 
         activeNews.Add(news);
         OnNewsActivated(news);
+
+        PrintNews(news);
+    }
+
+    public void PrintNews(News news)
+    {
+        TextMeshProUGUI[] textComponents = NewsWindow.GetComponentsInChildren<TextMeshProUGUI>();
+
+        if (textComponents.Length >= 2)
+        {
+            textComponents[0].text = news.Title;
+            textComponents[1].text = news.Text;
+        }
     }
 
     public News GenerateNews()
