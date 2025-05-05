@@ -178,7 +178,7 @@ public class Graph_ : MonoBehaviour
             Points[i].transform.position = Tops[i];
 
         }
-        lineRenderer.SetWidth(Width, Width);
+
         lineRenderer.positionCount = Tops.Length;
         lineRenderer.SetPositions(Tops);
 

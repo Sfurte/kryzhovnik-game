@@ -28,7 +28,7 @@ public class StockPricesUpdater : MonoBehaviour
     /// Вычисляет цену акции на следующем ходу
     /// </summary>
     /// <param name="stock">Акции компании</param>
-    private float GetNextPrice(CompanyStock stock)
+    public float GetNextPrice(CompanyStock stock)
     {
         return stock.Price + Random.Range(-FluctuationCoefficient, FluctuationCoefficient);
     }

@@ -13,9 +13,8 @@ public class GamePtocess : MonoBehaviour
         PlayerStats.Money = 1000;
     }
 
-    // Update is called once per frame
     void Update()
     {
-        clock.Tick();
+       
     }
 }

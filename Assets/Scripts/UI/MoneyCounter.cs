@@ -5,14 +5,15 @@ using UnityEngine;
 
 public class MoneyCounter : MonoBehaviour
 {
-    void Start()
-    {
-        Clock.GetInstance().TickActions += () => PrintCountMoney();
-    }
-
     public void PrintCountMoney()
     {
         TextMeshProUGUI[] textComponents = GetComponentsInChildren<TextMeshProUGUI>();
             textComponents[0].text = PlayerStats.Money.ToString() + "€$";
     }
+
+    public void Update()
+    {
+         PrintCountMoney();
+    }
+
 }

@@ -7,6 +7,9 @@ using UnityEngine;
 /// </summary>
 public class CompanyStock
 {
+    public int CountStartPricePoint= 60;
+
+
     /// <summary>
     /// Текущая цена за одну акцию
     /// </summary>
@@ -46,6 +49,13 @@ public class CompanyStock
     {
         Price = price;
         DividendsPerShare = dividendsPerShare;
+
+        for (int i = 0; i < CountStartPricePoint; i++)
+        {
+            priceLog.Add(50);
+        }
+
+        
     }
 
     /// <summary>

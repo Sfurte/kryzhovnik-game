@@ -33,19 +33,14 @@ public class Clock : MonoBehaviour
             Debug.Log($"Tick #{TickNumber}");
         };
 
-        StartCoroutine("Tick");
     }
 
     /// <summary>
     /// Переводит игру на следующий ход
     /// </summary>
-    public IEnumerator Tick()
+    public void Tick()
     {
-        while (true)
-        {
-            yield return new WaitForSeconds(tickDuration);
-            TickActions();
-            TickNumber++;
-        }
+        TickActions?.Invoke();
+        TickNumber++;
     }
 }

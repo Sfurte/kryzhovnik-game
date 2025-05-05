@@ -1,0 +1,19 @@
+{
+  "companies": [
+    {
+      "name": "Cool Company",
+      "money": 100,
+      "dividendsPerShare": 0.02
+    },
+    {
+      "name": "777 company",
+      "money": 20,
+      "dividendsPerShare": 0.05
+    },
+    {
+      "name": "Big company",
+      "money": 30,
+      "dividendsPerShare": 0.9
+    }
+  ]
+}
