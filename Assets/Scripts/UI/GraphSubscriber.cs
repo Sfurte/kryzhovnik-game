@@ -11,7 +11,7 @@ public class GraphSubscriber : MonoBehaviour
 
     private void Start()
     {
-        Clock.GetInstance().TickActions += () => Graph_Data.SetDataArray(GameState.SelectedCompany.Stock.PriceLog.ToList());
+        Clock.GetInstance().TickActions += () => Graph_Data.AddPoint(GameState.SelectedCompany.Stock.PriceLog.Last());
     }
 
     void Update()

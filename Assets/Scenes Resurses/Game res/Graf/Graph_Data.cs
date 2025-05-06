@@ -52,7 +52,7 @@ public class Graph_Data : MonoBehaviour
     {
         DataList = newDataList.Skip(Math.Max(0, newDataList.Count - CountPoint)).ToList();
 
-        CreateGraph();
+        UpdateGraph();
     }
 
     public void SetDataArray(List<float> newDataList)

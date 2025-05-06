@@ -1,54 +1,102 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 
 public class Graph_ : MonoBehaviour
 {
 
-
+    public GameObject Window;
 
     [Header("X Axis Settings")]
-    public float scaleXAxisDivisions = 1;   // масштаб оси делений
     public GameObject XDivision;             //префаб деления
     public int CountXDivision = 13;               // число делений
     public Vector2 XDivisionSize;            // размер самого деления
     public float xAxisTextOffset = 0.5f;     // отступ текста от деления
 
     [Header("Y Axis Settings")]
-    public float scaleYAxisDivisions = 1;
     public GameObject YDivision;
     public int CountYDivision;
     public Vector2 YDivisionSize;
     public float yAxisTextOffset = 0.5f;
 
-    public float DivisionYValue = 100;  // цена деления по Y
+
 
 
     [Header("Graph Settings")]
+    public int CountPoint;
     public GameObject Point;            //Точка префаб
     public float Width;               //Толщина линии графика
-    public float scaleGraphX = 1;    // Масштаб графика
-    public float scaleGraphY = 1;     // Масштаб графика
+                                      // public float scaleGraphX = 1;    // Масштаб графика
+    public float scaleGraphY = 0.03f;     // Масштаб графика
     public int axisFontSize = 24;     //размер шрифта деления
 
+    public int MinDivisionYValue = 100;
+    public int YDivisionCoeff = 5;
+    private int currentYDivisionScale = 1;
 
+    private float scaleGraphX = 1;
+    // public float scaleGraphY = 1;
+
+
+    [Header("Line Settings")]
     public GameObject horizontalLinePrefab; // Префаб горизонтальной линии 
     private GameObject currentHorizontalLine;
     public float lineLength = 10f;
 
-
+    [Header("Points Settings")]
     private GameObject[] Points;
     private Vector3[] Tops;
     private LineRenderer lineRenderer;
 
 
+
+
     private int currentFirstHour = 0;
 
 
-
     private List<GameObject> allGraphObjects = new List<GameObject>(); // все созданные объекты графика
+
+
+    [Header("Axis Settings")]
+
+    private float scaleXAxisDivisions = 1;
+    private float scaleYAxisDivisions = 1;
+    private float DivisionYValue = 100;  // цена деления по Y
+
+
+
+    private void CalculateScale()
+    {
+        RectTransform rectTransform = Window.GetComponent<RectTransform>();
+        Vector3[] corners = new Vector3[4];
+        rectTransform.GetWorldCorners(corners);
+
+        float graphWidth = corners[2].x - transform.position.x;
+        float graphHeight = corners[2].y - transform.position.y;
+
+        scaleXAxisDivisions = graphWidth / (CountXDivision);
+        scaleGraphX = graphWidth / Mathf.Max(1, CountPoint);
+
+
+        scaleYAxisDivisions = graphHeight / CountYDivision;
+
+        CalculateDivisionYValue(graphHeight);
+    }
+
+    private void CalculateDivisionYValue(float graphHeight)
+    {
+        float maxValue = Tops.Max(p => p.y);
+        if (maxValue > MinDivisionYValue * currentYDivisionScale)
+            currentYDivisionScale *= YDivisionCoeff;
+        else if(maxValue < MinDivisionYValue * currentYDivisionScale && currentYDivisionScale >1)
+            currentYDivisionScale /= YDivisionCoeff;
+        DivisionYValue = MinDivisionYValue * currentYDivisionScale;
+    }
+    
+
 
     private void ClearAllGraphObjects()
     {
@@ -67,7 +115,8 @@ public class Graph_ : MonoBehaviour
 
     public void CreateXY()
     {
-        ClearAllGraphObjects(); 
+        CalculateScale();
+        ClearAllGraphObjects();
 
         Vector3 Position = transform.position;
 
@@ -115,11 +164,11 @@ public class Graph_ : MonoBehaviour
         for (int i = 0; i < Points.Length; i++)
         {
             Points[i] = Instantiate(Point, Vector3.zero, transform.rotation);
-            allGraphObjects.Add(Points[i]); 
+            allGraphObjects.Add(Points[i]);
         }
     }
 
-    
+
 
     public void ShiftHoursLeft()
     {
@@ -166,43 +215,43 @@ public class Graph_ : MonoBehaviour
 
     public void LocateGraph(Vector3[] arrPoint)
     {
+
         Vector3 Position = transform.position;
 
         for (int i = 0; i < arrPoint.Length; i++)
         {
-            Tops[i] = Position + new Vector3(arrPoint[i].x * scaleGraphX, arrPoint[i].y * scaleGraphY, 0);
+            Tops[i] = Position + new Vector3(
+                i * scaleGraphX, 
+                arrPoint[i].y * scaleGraphY,
+                0);
         }
 
-        for (int i = 0; i < arrPoint.Length; i++)
-        {
-            Points[i].transform.position = Tops[i];
 
-        }
 
         lineRenderer.positionCount = Tops.Length;
         lineRenderer.SetPositions(Tops);
 
-        
+
     }
 
     public void UpdateGraph(Vector3[] DataArray)
     {
-        ClearAllGraphObjects();
         ShiftHoursLeft();
-        CreateXY();
+        ClearAllGraphObjects();
+        
         DrawGraph(DataArray);
         UpdateHorizontalLine(DataArray);
         LocateGraph(DataArray);
+        CreateXY();
     }
 
     public void CreateGraph(Vector3[] DataArray)
     {
         ClearAllGraphObjects();
-        CreateXY();
+
         DrawGraph(DataArray);
         UpdateHorizontalLine(DataArray);
         LocateGraph(DataArray);
+        CreateXY();
     }
-
-
 }
