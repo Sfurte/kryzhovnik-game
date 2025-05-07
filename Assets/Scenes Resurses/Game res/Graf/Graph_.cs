@@ -7,14 +7,13 @@ using UnityEngine;
 
 public class Graph_ : MonoBehaviour
 {
-
     public GameObject Window;
 
     [Header("X Axis Settings")]
-    public GameObject XDivision;             //префаб деления
-    public int CountXDivision = 13;               // число делений
-    public Vector2 XDivisionSize;            // размер самого деления
-    public float xAxisTextOffset = 0.5f;     // отступ текста от деления
+    public GameObject XDivision;             //пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+    public int CountXDivision = 13;               // пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+    public Vector2 XDivisionSize;            // пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+    public float xAxisTextOffset = 0.5f;     // пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 
     [Header("Y Axis Settings")]
     public GameObject YDivision;
@@ -27,13 +26,13 @@ public class Graph_ : MonoBehaviour
 
     [Header("Graph Settings")]
     public int CountPoint;
-    public GameObject Point;            //Точка префаб
-    public float Width;               //Толщина линии графика
-                                      // public float scaleGraphX = 1;    // Масштаб графика
-    public float scaleGraphY = 0.03f;     // Масштаб графика
-    public int axisFontSize = 24;     //размер шрифта деления
+    public GameObject Point;            //пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
+    public float Width;               //пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+                                      // public float scaleGraphX = 1;    // пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+    public float scaleGraphY = 0.03f;     // пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+    public int axisFontSize = 24;     //пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 
-    public int MinDivisionYValue = 100;
+    public int MinDivisionYValue = 10;
     public int YDivisionCoeff = 5;
     private int currentYDivisionScale = 1;
 
@@ -42,7 +41,7 @@ public class Graph_ : MonoBehaviour
 
 
     [Header("Line Settings")]
-    public GameObject horizontalLinePrefab; // Префаб горизонтальной линии 
+    public GameObject horizontalLinePrefab; // пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ 
     private GameObject currentHorizontalLine;
     public float lineLength = 10f;
 
@@ -57,14 +56,14 @@ public class Graph_ : MonoBehaviour
     private int currentFirstHour = 0;
 
 
-    private List<GameObject> allGraphObjects = new List<GameObject>(); // все созданные объекты графика
+    private List<GameObject> allGraphObjects = new List<GameObject>(); // пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 
 
     [Header("Axis Settings")]
 
     private float scaleXAxisDivisions = 1;
     private float scaleYAxisDivisions = 1;
-    private float DivisionYValue = 100;  // цена деления по Y
+    private float DivisionYValue = 100;  // пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ Y
 
 
 
@@ -91,11 +90,11 @@ public class Graph_ : MonoBehaviour
         float maxValue = Tops.Max(p => p.y);
         if (maxValue > MinDivisionYValue * currentYDivisionScale)
             currentYDivisionScale *= YDivisionCoeff;
-        else if(maxValue < MinDivisionYValue * currentYDivisionScale && currentYDivisionScale >1)
+        else if (maxValue < MinDivisionYValue * currentYDivisionScale && currentYDivisionScale > 1)
             currentYDivisionScale /= YDivisionCoeff;
         DivisionYValue = MinDivisionYValue * currentYDivisionScale;
     }
-    
+
 
 
     private void ClearAllGraphObjects()
@@ -221,7 +220,7 @@ public class Graph_ : MonoBehaviour
         for (int i = 0; i < arrPoint.Length; i++)
         {
             Tops[i] = Position + new Vector3(
-                i * scaleGraphX, 
+                i * scaleGraphX,
                 arrPoint[i].y * scaleGraphY,
                 0);
         }
@@ -238,7 +237,7 @@ public class Graph_ : MonoBehaviour
     {
         ShiftHoursLeft();
         ClearAllGraphObjects();
-        
+
         DrawGraph(DataArray);
         UpdateHorizontalLine(DataArray);
         LocateGraph(DataArray);

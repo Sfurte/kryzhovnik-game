@@ -7,18 +7,18 @@ using UnityEngine.UI;
 
 public class TickNumberSubscriber : MonoBehaviour
 {
-    public Clock clock;
+    public GameObject TextWindow;
 
     
 
 
     private void Start()
     {
-        var textMesh = GetComponent<TMP_Text>();
+        var textMesh = TextWindow.GetComponent<TMP_Text>();
 
-        clock.TickActions += () => { textMesh.text = clock.TickNumber.ToString(); };
+        Clock.GetInstance().TickActions += () => { textMesh.text = (Clock.GetInstance().TickNumber +1 ).ToString(); };
     }
 
-   
+    
 
 }

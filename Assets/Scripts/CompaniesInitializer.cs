@@ -93,6 +93,7 @@ public class CompaniesInitializer : MonoBehaviour
     {
         GameState.SelectCompany(Company.AllCompanies[index]);
         Debug.Log($"selected company : {Company.AllCompanies[index].Name}");
+
     }
 
     private void SetupCompanyDropdown()

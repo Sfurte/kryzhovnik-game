@@ -1,6 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using System;
 
 /// <summary>
 /// Отвечает за изменение цены акций компании согласно некой модели
@@ -12,6 +11,8 @@ public class StockPricesUpdater : MonoBehaviour
 
     private void Start()
     {
+        for (int i = 0; i < 100; i++)
+            UpdateAllPrices();
         Clock.GetInstance().TickActions += UpdateAllPrices;
     }
 
@@ -30,6 +31,6 @@ public class StockPricesUpdater : MonoBehaviour
     /// <param name="stock">Акции компании</param>
     public float GetNextPrice(CompanyStock stock)
     {
-        return stock.Price + Random.Range(-FluctuationCoefficient, FluctuationCoefficient);
+        return Math.Abs(stock.Price + UnityEngine.Random.Range(-FluctuationCoefficient, FluctuationCoefficient));
     }
 }

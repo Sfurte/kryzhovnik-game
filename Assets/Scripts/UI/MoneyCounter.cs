@@ -14,7 +14,7 @@ public class MoneyCounter : MonoBehaviour
 
     public void Update()
     {
-         PrintCountMoney();
+        PrintCountMoney();
     }
 
 }
