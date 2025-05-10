@@ -9,19 +9,32 @@ public class CompanyStock
 {
     public int CountStartPricePoint= 60;
 
-
     /// <summary>
     /// Текущая цена за одну акцию
     /// </summary>
     public float Price
     {
-        get => price;
-        set
+        get
         {
-            price = value;
-            priceLog.Add(value);
+            float price = basePrice;
+            foreach (var impact in newsImpacts)
+            {
+                price += impact.Value;
+            }
+            return price;
         }
     }
+
+    public float BasePrice
+    {
+        get => basePrice;
+        set
+        {
+            basePrice = value;
+            priceLog.Add(Price);
+        }
+    }
+    public List<NewsImpact> newsImpacts = new List<NewsImpact>();
     /// <summary>
     /// Список предыдущих значений цены за акцию,
     /// где первый элемент - самая старая записанная цена,
@@ -42,20 +55,18 @@ public class CompanyStock
     /// </summary>
     public int MaxBuyAmount { get => (int)(PlayerStats.Money / Price); }
 
-    private float price;
+    private float basePrice;
     private List<float> priceLog = new List<float>();
 
     public CompanyStock(float price, float dividendsPerShare)
     {
-        Price = price;
+        this.basePrice = price;
         DividendsPerShare = dividendsPerShare;
 
         for (int i = 0; i < CountStartPricePoint; i++)
         {
             priceLog.Add(50);
         }
-
-        
     }
 
     /// <summary>

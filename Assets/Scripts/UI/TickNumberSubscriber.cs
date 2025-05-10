@@ -9,16 +9,10 @@ public class TickNumberSubscriber : MonoBehaviour
 {
     public GameObject TextWindow;
 
-    
-
-
     private void Start()
     {
         var textMesh = TextWindow.GetComponent<TMP_Text>();
 
         Clock.GetInstance().TickActions += () => { textMesh.text = (Clock.GetInstance().TickNumber +1 ).ToString(); };
     }
-
-    
-
 }

@@ -8,14 +8,14 @@ using UnityEngine;
 /// </summary>
 public class Clock : MonoBehaviour
 {
+    public static Clock GetInstance() => instance;
     public int TickNumber { get; private set; }
 
     public float tickDuration = 0.2f;
     public Action TickActions;
 
     private static Clock instance;
-
-    public static Clock GetInstance() => instance;
+    private List<Action> delayedActions;
 
     private void Awake()
     {
@@ -32,6 +32,10 @@ public class Clock : MonoBehaviour
         {
             Debug.Log($"Tick #{TickNumber}");
         };
+    }
+
+    public void AddDelayedAction(int delay)
+    {
 
     }
 

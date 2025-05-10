@@ -16,11 +16,19 @@ public class StockPricesUpdater : MonoBehaviour
         Clock.GetInstance().TickActions += UpdateAllPrices;
     }
 
+    private void UpdateAllNewsImpacts()
+    {
+        foreach (var news in NewsManager.ActiveNews)
+        {
+            news.Impact.NextDay();
+        }
+    }
+
     private void UpdateAllPrices()
     {
         foreach (var company in Company.AllCompanies)
         {
-            company.Stock.Price = GetNextPrice(company.Stock);
+            company.Stock.BasePrice = GetNextBasePrice(company.Stock);
             Debug.Log($"Теперь у компании \"{company.Name}\" цена акции {company.Stock.Price}");
         }
     }
@@ -29,8 +37,8 @@ public class StockPricesUpdater : MonoBehaviour
     /// Вычисляет цену акции на следующем ходу
     /// </summary>
     /// <param name="stock">Акции компании</param>
-    public float GetNextPrice(CompanyStock stock)
+    public float GetNextBasePrice(CompanyStock stock)
     {
-        return Math.Abs(stock.Price + UnityEngine.Random.Range(-FluctuationCoefficient, FluctuationCoefficient));
+        return Math.Abs(stock.BasePrice + UnityEngine.Random.Range(-FluctuationCoefficient, FluctuationCoefficient));
     }
 }

@@ -6,18 +6,15 @@ using UnityEngine;
 
 public class NewsManager : MonoBehaviour
 {
-    public IReadOnlyList<News> ActiveNews { get => activeNews; }
+    public static IReadOnlyList<News> ActiveNews { get => activeNews; }
     public static Action<News> OnNewsActivated;
 
     public GameObject NewsWindow;
 
-
     [SerializeField]
     private float newsChancePerTick;
-    private List<News> activeNews = new List<News>();
+    private static List<News> activeNews = new List<News>();
     private List<NewsTemplate> templates;
-
-
 
     private void Awake()
     {
@@ -38,7 +35,7 @@ public class NewsManager : MonoBehaviour
 
     public void ActivateNews(News news)
     {
-        news.AffectedCompany.Stock.Price += news.ImpactOnStocks;
+        news.AffectedCompany.Stock.newsImpacts.Add(news.Impact);
 
         activeNews.Add(news);
         OnNewsActivated(news);

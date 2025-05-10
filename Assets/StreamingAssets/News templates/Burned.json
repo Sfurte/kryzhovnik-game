@@ -1,6 +1,7 @@
 {
   "TitleTemplate": "У компании %company_name% сгорела штаб-квартира",
   "TextTemplate": "%company_name% столкнулась с печальной ситуацией: сотрудник оставил утюг включённым на рабочем месте и всё сгорело. Ну не повезло блин. Курс акций обвалится походу.",
-  "ImpactOnStocksCoefficient": -0.333333,
+  "ImpactDuration": 8,
+	"ImpactOnStocksCoefficient": -0.333333,
   "IsImpactMultiplicative": true
 }
