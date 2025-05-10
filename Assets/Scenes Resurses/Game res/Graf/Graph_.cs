@@ -22,8 +22,6 @@ public class Graph_ : MonoBehaviour
     public float yAxisTextOffset = 0.5f;
 
 
-
-
     [Header("Graph Settings")]
     public int CountPoint;
     public GameObject Point;            //����� ������

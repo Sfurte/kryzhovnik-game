@@ -14,12 +14,12 @@ public class NewsImpact
 
     public void NextDay()
     {
-        if(DurationLeft <= 0)
+        Value -= Value / DurationLeft;
+
+        if (DurationLeft <= 0)
         {
             Value = 0;
         }
         DurationLeft--;
-
-        Value -= Value / DurationLeft;
     }
 }

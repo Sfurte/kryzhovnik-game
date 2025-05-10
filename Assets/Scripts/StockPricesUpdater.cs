@@ -14,6 +14,7 @@ public class StockPricesUpdater : MonoBehaviour
         for (int i = 0; i < 100; i++)
             UpdateAllPrices();
         Clock.GetInstance().TickActions += UpdateAllPrices;
+        Clock.GetInstance().TickActions += UpdateAllNewsImpacts;
     }
 
     private void UpdateAllNewsImpacts()
@@ -29,7 +30,7 @@ public class StockPricesUpdater : MonoBehaviour
         foreach (var company in Company.AllCompanies)
         {
             company.Stock.BasePrice = GetNextBasePrice(company.Stock);
-            Debug.Log($"Теперь у компании \"{company.Name}\" цена акции {company.Stock.Price}");
+            Debug.Log($"Теперь у компании \"{company.Name}\" цена акции {company.Stock.Price} (базовая: {company.Stock.BasePrice})");
         }
     }
 
