@@ -1,0 +1,24 @@
+{
+  "companies": [
+    {
+      "name": "СлитКо (металл)",
+      "money": 100,
+      "dividendsPerShare": 5
+    },
+    {
+      "name": "Яблочная компания",
+      "money": 20,
+      "dividendsPerShare": 1
+    },
+    {
+      "name": "Ассоциация лесорубов",
+      "money": 30,
+      "dividendsPerShare": 1.5
+    },
+		{
+      "name": "Второй Архитекториум (строительство)",
+      "money": 70,
+      "dividendsPerShare": 3.5
+    }
+  ]
+}

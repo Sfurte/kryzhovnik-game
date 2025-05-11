@@ -19,4 +19,9 @@ public class Company
         Stock = new CompanyStock(sharePrice, dividendsPerShare);
         allCompanies.Add(this);
     }
+
+    public static void CreateListCompanies(List<Company> _companies)
+    {
+        allCompanies = _companies;
+    }
 }

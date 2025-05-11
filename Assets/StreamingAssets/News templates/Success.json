@@ -1,6 +1,7 @@
 {
   "TitleTemplate": "Компания %company_name% заключила важную сделку",
   "TextTemplate": "После длительных переговоров компании %company_name% удалось заключить важную и очень выгодную сделку, которая в перспективе может позволить ей захватить определённый сегмент рынка.",
-  "ImpactOnStocksCoefficient": 20,
+  "ImpactDuration": 8,
+	"ImpactOnStocksCoefficient": 20,
   "IsImpactMultiplicative": false
 }
