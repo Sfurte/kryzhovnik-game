@@ -13,6 +13,9 @@ public class NewsManager : MonoBehaviour
 
     [SerializeField]
     private float newsChancePerTick;
+    [SerializeField]
+    private int randomNewsStartDay;
+
     private static List<News> activeNews = new List<News>();
     private List<NewsTemplate> templates;
 
@@ -24,26 +27,30 @@ public class NewsManager : MonoBehaviour
 
     private void Start()
     {
-        Clock.GetInstance().TickActions += () =>
-        {
-            if (newsChancePerTick >= UnityEngine.Random.value)
-            {
-                ActivateNews(GenerateNews());
-            }
-        };
+        Clock.GetInstance().AddDelayedAction(() => StartRandomNewsGeneration(), randomNewsStartDay);
     }
 
+    /// <summary>
+    /// Сообщает переданные новости, и после заданной задержки активирует их
+    /// </summary>
+    public void InitiateNews(News news, int delay)
+    {
+        PrintNews(news);
+        Clock.GetInstance().AddDelayedAction(() => ActivateNews(news), delay);
+    }
+
+    /// <summary>
+    /// Переданные новости начинают влиять на курс акций
+    /// </summary>
     public void ActivateNews(News news)
     {
         news.AffectedCompany.Stock.newsImpacts.Add(news.Impact);
 
         activeNews.Add(news);
         OnNewsActivated(news);
-
-        PrintNews(news);
     }
 
-    public void PrintNews(News news)
+    private void PrintNews(News news)
     {
         TextMeshProUGUI[] textComponents = NewsWindow.GetComponentsInChildren<TextMeshProUGUI>();
 
@@ -54,7 +61,7 @@ public class NewsManager : MonoBehaviour
         }
     }
 
-    public News GenerateNews()
+    private News GenerateNews()
     {
         var affectedCompany = Company.AllCompanies[UnityEngine.Random.Range(0, Company.AllCompanies.Count)];
         var chosenTemplate = templates[UnityEngine.Random.Range(0, templates.Count)];
@@ -66,5 +73,16 @@ public class NewsManager : MonoBehaviour
             $"{affectedCompany.Name} столкнулась с печальной ситуацией: сотрудник оставил утюг включённым на рабочем месте и всё сгорело. Ну не повезло блин. Курс акций обвалится походу.",
             affectedCompany,
             -affectedCompany.Stock.Price / 3);*/
+    }
+
+    private void StartRandomNewsGeneration()
+    {
+        Clock.GetInstance().TickActions += () =>
+        {
+            if (newsChancePerTick >= UnityEngine.Random.value)
+            {
+                InitiateNews(GenerateNews(), 1);
+            }
+        };
     }
 }

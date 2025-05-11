@@ -15,7 +15,7 @@ public class Clock : MonoBehaviour
     public Action TickActions;
 
     private static Clock instance;
-    private List<Action> delayedActions;
+    private List<DelayedAction> delayedActions = new List<DelayedAction>();
 
     private void Awake()
     {
@@ -34,10 +34,10 @@ public class Clock : MonoBehaviour
         };
     }
 
-    public void AddDelayedAction(int delay)
+    public void AddDelayedAction(Action action, int delay)
     {
-
-    }
+        delayedActions.Add(new DelayedAction() { Action = action, DaysLeft = delay });
+    } 
 
     /// <summary>
     /// Переводит игру на следующий ход
@@ -45,6 +45,26 @@ public class Clock : MonoBehaviour
     public void Tick()
     {
         TickActions?.Invoke();
+
+        var newDelayedActions = new List<DelayedAction>();
+        foreach (var delayedAction in delayedActions)
+        {
+            delayedAction.DaysLeft--;
+            if (delayedAction.DaysLeft <= 0)
+            {
+                delayedAction.Action();
+                continue;
+            }
+            newDelayedActions.Add(delayedAction);
+        }
+        delayedActions = newDelayedActions;
+
         TickNumber++;
+    }
+
+    private class DelayedAction
+    {
+        public Action Action { get; set; }
+        public int DaysLeft { get; set; }
     }
 }
