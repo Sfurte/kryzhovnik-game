@@ -1,19 +1,24 @@
 {
   "companies": [
     {
-      "name": "Cool Company",
+      "name": "СлитКо (металл)",
       "money": 100,
-      "dividendsPerShare": 0.02
+      "dividendsPerShare": 5
     },
     {
-      "name": "777 company",
+      "name": "Яблочная компания",
       "money": 20,
-      "dividendsPerShare": 0.05
+      "dividendsPerShare": 1
     },
     {
-      "name": "Big company",
+      "name": "Ассоциация лесорубов",
       "money": 30,
-      "dividendsPerShare": 0.9
+      "dividendsPerShare": 1.5
+    },
+		{
+      "name": "Второй Архитекториум (строительство)",
+      "money": 70,
+      "dividendsPerShare": 3.5
     }
   ]
 }

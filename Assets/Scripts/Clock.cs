@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 /// <summary>
@@ -46,18 +47,20 @@ public class Clock : MonoBehaviour
     {
         TickActions?.Invoke();
 
-        var newDelayedActions = new List<DelayedAction>();
-        foreach (var delayedAction in delayedActions)
+        // Копия потому что:
+        // 1. Отложенные события могут сами изменить состав списка delayedActions, что сломает foreach
+        // 2. Удаление отработавших действий в цикле тоже сломает foreach
+        var delayedActionsCopy = new List<DelayedAction>(delayedActions);
+        foreach (var delayedAction in delayedActionsCopy)
         {
             delayedAction.DaysLeft--;
             if (delayedAction.DaysLeft <= 0)
             {
                 delayedAction.Action();
+                delayedActions.Remove(delayedAction);
                 continue;
             }
-            newDelayedActions.Add(delayedAction);
         }
-        delayedActions = newDelayedActions;
 
         TickNumber++;
     }

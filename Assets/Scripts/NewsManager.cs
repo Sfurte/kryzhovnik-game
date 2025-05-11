@@ -23,6 +23,17 @@ public class NewsManager : MonoBehaviour
     {
         templates = new List<NewsTemplate>(NewsParser.GetTemplates());
         OnNewsActivated = (news) => { Debug.Log($"Новость: {news.Title}"); };
+
+        TutorialManager.TutorialEvent += TutorialManager_TutorialEvent;
+    }
+
+    private void TutorialManager_TutorialEvent(TutorialEventArgs e)
+    {
+        if(e.NewsToInitiate == null)
+        {
+            return;
+        }
+        InitiateNews(e.NewsToInitiate, 1);
     }
 
     private void Start()
