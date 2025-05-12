@@ -45,7 +45,7 @@ public class Graph_Data : MonoBehaviour
         ShiftPointsLeft();
 
         UpdateGraph();
-        Debug.Log($" ������� ����� {value}");
+        Debug.Log($" Добавлена точка {value}");
     }
 
     public void SetDataArray(List<Vector3> newDataList)

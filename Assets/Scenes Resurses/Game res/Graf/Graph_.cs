@@ -119,7 +119,7 @@ public class Graph_ : MonoBehaviour
 
         for (int i = 0; i < CountXDivision; i++)
         {
-            int hour = (currentFirstHour + i) % 24;
+            int hour = (currentFirstHour + 1) % 24;
             Vector3 divisionPos = Position + new Vector3(i * scaleXAxisDivisions, 0, 0);
 
             GameObject division = Instantiate(XDivision, divisionPos, transform.rotation);
@@ -237,7 +237,7 @@ public class Graph_ : MonoBehaviour
         ClearAllGraphObjects();
 
         DrawGraph(DataArray);
-        UpdateHorizontalLine(DataArray);
+       // UpdateHorizontalLine(DataArray);
         LocateGraph(DataArray);
         CreateXY();
     }
@@ -247,7 +247,7 @@ public class Graph_ : MonoBehaviour
         ClearAllGraphObjects();
 
         DrawGraph(DataArray);
-        UpdateHorizontalLine(DataArray);
+      //  UpdateHorizontalLine(DataArray);
         LocateGraph(DataArray);
         CreateXY();
     }

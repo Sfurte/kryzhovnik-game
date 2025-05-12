@@ -13,6 +13,7 @@ public class TickNumberSubscriber : MonoBehaviour
     {
         var textMesh = TextWindow.GetComponent<TMP_Text>();
 
-        Clock.GetInstance().TickActions += () => { textMesh.text = (Clock.GetInstance().TickNumber +1 ).ToString(); };
+
+        Clock.GetInstance().TickActions += () => { textMesh.text = (Clock.GetInstance().TickNumber  ).ToString(); };
     }
 }
