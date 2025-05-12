@@ -33,7 +33,7 @@ public class TutorialManager : MonoBehaviour
         clock.AddDelayedAction(() => TutorialEvent(new TutorialEventArgs()
         {
             TutorialText =
-            "Цена акции выросла, теперь её можно продать (кнопка скоро будет)",
+            "Цена акции выросла, теперь её можно продать (кнопка левее кнопки покупки акции)",
         }), 2);
     }
 
