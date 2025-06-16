@@ -39,6 +39,7 @@ public class CompaniesInitializer : MonoBehaviour
     {
         Initialize(uninitializedCompanies);
         uninitializedCompanies = null;
+        
     }
 
     /// <summary>
@@ -86,7 +87,7 @@ public class CompaniesInitializer : MonoBehaviour
     /// </summary>
     private void SelectDefaultCompany()
     {
-        GameState.SelectCompany(Company.AllCompanies[1]);
+        GameState.SelectCompany(Company.AllCompanies[0]);
     }
 
     public void SelectCompany(int index)

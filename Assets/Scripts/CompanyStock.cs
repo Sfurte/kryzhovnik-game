@@ -106,11 +106,32 @@ public class CompanyStock
         
     }
 
+    public bool TrySell(int amount)
+    {
+        if (amount > BoughtAmount)
+        {
+            return false;
+        }
+
+        Sell(amount);
+        return true;
+    }
+
+    public void Sell(int amount)
+    {
+        float TotalPrice = Price * amount;
+
+        PlayerStats.Money += TotalPrice;
+        BoughtAmount -= amount;
+
+    }
+
     /// <summary>
     /// ¬ыплачивает игроку дивиденды в зависимости от числа купленых акций
     /// </summary>
     public void PayDividends()
     {
-        PlayerStats.Money += DividendsPerShare * BoughtAmount;
+        float dividends = DividendsPerShare * BoughtAmount* Price;
+        PlayerStats.Money += dividends;
     }
 }

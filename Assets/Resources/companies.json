@@ -3,22 +3,22 @@
     {
       "name": "СлитКо (металл)",
       "money": 100,
-      "dividendsPerShare": 5
+      "dividendsPerShare": 0.02
     },
     {
       "name": "Яблочная компания",
       "money": 20,
-      "dividendsPerShare": 1
+      "dividendsPerShare": 0.06
     },
     {
       "name": "Ассоциация лесорубов",
       "money": 30,
-      "dividendsPerShare": 1.5
+      "dividendsPerShare": 0.1
     },
-		{
+    {
       "name": "Второй Архитекториум (строительство)",
       "money": 70,
-      "dividendsPerShare": 3.5
+      "dividendsPerShare": 0.09
     }
   ]
 }

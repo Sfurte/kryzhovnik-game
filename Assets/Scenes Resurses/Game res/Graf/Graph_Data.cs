@@ -5,7 +5,7 @@ using System;
 
 public class Graph_Data : MonoBehaviour
 {
-    [SerializeField] int CountPoint = 60;
+    [SerializeField] int CountPoint = 30;
     public int ScaleX = 3;
     public Graph_ graph_;
     public List<Vector3> DataList = new List<Vector3>();
@@ -13,6 +13,7 @@ public class Graph_Data : MonoBehaviour
 
      void Start()
     {
+        TutorialPries.SetStartPriceLogCompanys();
         int lenghtPriceLog = GameState.SelectedCompany.Stock.PriceLog.Count;
         for (int i = 0; i < 60; i++)
         {
@@ -45,7 +46,7 @@ public class Graph_Data : MonoBehaviour
         ShiftPointsLeft();
 
         UpdateGraph();
-        Debug.Log($" ������� ����� {value}");
+        Debug.Log($" Добавлена точка {value}");
     }
 
     public void SetDataArray(List<Vector3> newDataList)

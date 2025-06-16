@@ -10,6 +10,8 @@ public class GameProcess : MonoBehaviour
     void Start()
     {
         PlayerStats.Money = 300;
+
+        Clock.GetInstance().TickActions += () => { PlayerStats.UpdateMoneyLog(); };
         clock.Tick();
     }
 

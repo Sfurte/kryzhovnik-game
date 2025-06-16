@@ -37,6 +37,8 @@ public class Graph_ : MonoBehaviour
     private float scaleGraphX = 1;
     // public float scaleGraphY = 1;
 
+    public int xAxisStep = 2;
+
 
     [Header("Line Settings")]
     public GameObject horizontalLinePrefab; // ������ �������������� ����� 
@@ -51,8 +53,8 @@ public class Graph_ : MonoBehaviour
 
 
 
-    private int currentFirstHour = 0;
-
+    private int currentFirstHour = 15;
+    private int xAxisOffset = 0;
 
     private List<GameObject> allGraphObjects = new List<GameObject>(); // ��� ��������� ������� �������
 
@@ -119,7 +121,7 @@ public class Graph_ : MonoBehaviour
 
         for (int i = 0; i < CountXDivision; i++)
         {
-            int hour = (currentFirstHour + i) % 24;
+            int value = ((i + xAxisOffset) * xAxisStep) % 30;
             Vector3 divisionPos = Position + new Vector3(i * scaleXAxisDivisions, 0, 0);
 
             GameObject division = Instantiate(XDivision, divisionPos, transform.rotation);
@@ -127,7 +129,7 @@ public class Graph_ : MonoBehaviour
             allGraphObjects.Add(division);
 
             Vector3 textPos = divisionPos + new Vector3(0, -xAxisTextOffset, 0);
-            GameObject textObj = CreateTextDivision(textPos, FormatTime(hour), axisFontSize);
+            GameObject textObj = CreateTextDivision(textPos, value.ToString(), axisFontSize);
             allGraphObjects.Add(textObj);
         }
 
@@ -169,8 +171,11 @@ public class Graph_ : MonoBehaviour
 
     public void ShiftHoursLeft()
     {
-        currentFirstHour = (currentFirstHour + 1) % 24;
-        CreateXY();
+        if (Clock.GetInstance().TickNumber % 2 == 0)
+        {
+            xAxisOffset++; 
+            CreateXY();    
+        }
     }
 
     public GameObject CreateTextDivision(Vector3 position, string value, int fontSize)
@@ -237,7 +242,7 @@ public class Graph_ : MonoBehaviour
         ClearAllGraphObjects();
 
         DrawGraph(DataArray);
-        UpdateHorizontalLine(DataArray);
+       // UpdateHorizontalLine(DataArray);
         LocateGraph(DataArray);
         CreateXY();
     }
@@ -247,7 +252,7 @@ public class Graph_ : MonoBehaviour
         ClearAllGraphObjects();
 
         DrawGraph(DataArray);
-        UpdateHorizontalLine(DataArray);
+      //  UpdateHorizontalLine(DataArray);
         LocateGraph(DataArray);
         CreateXY();
     }
