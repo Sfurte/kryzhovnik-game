@@ -15,7 +15,7 @@ public class Graph_Data : MonoBehaviour
     {
         TutorialPries.SetStartPriceLogCompanys();
         int lenghtPriceLog = GameState.SelectedCompany.Stock.PriceLog.Count;
-        for (int i = 0; i < 60; i++)
+        for (int i = 0; i < CountPoint; i++)
         {
             DataList.Add(new Vector3(i * ScaleX, GameState.SelectedCompany.Stock.PriceLog[lenghtPriceLog- CountPoint +i], 0));
         }
